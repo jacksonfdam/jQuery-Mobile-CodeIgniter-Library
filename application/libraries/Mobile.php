@@ -168,15 +168,15 @@ class Mobile {
     	       
     	if($this->config['load_from_cdn'] == FALSE)
     	{
-    		$load .= '<link rel="stylesheet" href="'.$this->assets_url.'jquery.mobile-1.0a3.min.css" />';
-    		$load .= '<script type="text/javascript" src="'.$this->assets_url.'jquery-1.5.1.min.js"></script>';
-    		$load .= '<script type="text/javascript" src="'.$this->assets_url.'jquery.mobile-1.0a3.js"></script>';
+    		$load .= '<link rel="stylesheet" href="'.$this->assets_url.'jquery.mobile-1.0a4.1.min.css" />';
+    		$load .= '<script type="text/javascript" src="'.$this->assets_url.'jquery-1.5.2.min.js"></script>';
+    		$load .= '<script type="text/javascript" src="'.$this->assets_url.'jquery.mobile-1.0a4.1.min"></script>';
     	}
     	else
     	{	
-    		$load .= '<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" />';
-    		$load .= '<script src="http://code.jquery.com/jquery-1.5.min.js"></script>';
-    		$load .= '<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"></script>';
+    		$load .= '<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />';
+    		$load .= '<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>';
+    		$load .= '<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>';
     	}
     	    	
     	echo $load;

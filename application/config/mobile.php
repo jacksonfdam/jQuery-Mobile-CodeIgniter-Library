@@ -23,4 +23,4 @@ $config['mobile']['fixed_toolbars'] = FALSE;
 $config['mobile']['backbtn_auto']	= FALSE;
 $config['mobile']['backbtn_text']	= 'Back';
 
-$config['mobile']['load_from_cdn'] 	= FALSE;
+$config['mobile']['load_from_cdn'] 	= TRUE;

@@ -2,16 +2,31 @@
 
 class Welcome extends CI_Controller {
 
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
-				
+	
 		$this->load->library('mobile');
 	}
 
-	function index()
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -  
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in 
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see http://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function index()
 	{			
-		$this->mobile->header('Welcome')->button('welcome/login', 'Login', 'gear');
+		$this->mobile->header('Welcome')->button('welcome/options', 'Welcome', 'gear');
 		
 		$navbar = array(
 			'welcome/index' => 'Index',
@@ -20,14 +35,7 @@ class Welcome extends CI_Controller {
 		
 		$this->mobile->navbar($navbar, 'a');
 		
-		$this->mobile->view('welcome/index');
-	}
-		
-	function login()
-	{
-		$this->mobile->header('Login')->back_to('welcome/index');
-		
-		$this->mobile->view('welcome/login');	
+		$this->mobile->view('welcome_message');
 	}
 }
 
