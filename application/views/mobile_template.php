@@ -5,19 +5,15 @@
 	
 	<title>{page_title}</title>
 	
-	<?php $this->mobile->load(); ?>
-	
-	<link href="<?=base_url()?>static/default.style.css?v=<?=rand()?>" rel="stylesheet" />
-	
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-touch-fullscreen" content="yes" />
-	
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
 </head>
 
-<body data-base-url="<?=base_url()?>">
+<body>
 
-<div data-role="page" data-theme="{global_theme}"> 
+<div data-role="page" data-theme="{global_theme}">
 
 	{header}
 	
