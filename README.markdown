@@ -3,7 +3,7 @@
 Libreria para el desarrollo de versiones móviles de páginas con el framework
 jQuery Mobile.
 
-```PHP
+```php
 public function index()
 {
 	$this->mobile->header('Welcome to CodeIgniter!', 'a')->button('welcome/ayuda', 'Ayuda', 'info');
@@ -80,7 +80,7 @@ A parte de los métodos básicos de la libreria, se han definido algunas
 funciones auxiliares que ayudan en el desarrollo de las páginas gracias a 
 jQuery Mobile.
 
-#### link_to(*$url, $titulo, $datos = array(), $transicion*)
+### link_to(*$url, $titulo, $datos = array(), $transicion*)
 
 Funciona exactamente igual que la función `anchor()` de CodeIgniter pero, 
 acepta como último parametro la transición que queremos hacer para la 
