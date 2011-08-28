@@ -3,7 +3,7 @@
 Libreria para el desarrollo de versiones móviles de páginas con el framework
 jQuery Mobile.
 
-```php
+```
 public function index()
 {
 	$this->mobile->header('Welcome to CodeIgniter!', 'a')->button('welcome/ayuda', 'Ayuda', 'info');
@@ -30,7 +30,7 @@ del archivo de configuración. Además, si queremos que la barra mantenga una
 posición estática y se desplace con la página, podemos definirlo dentro del 
 archivo de configuración con `$config['mobile']['fixed_toolbars'] = TRUE;`
 
-### $this->mobile->header( … )->back_to(*$url, $texto*)
+### $this->mobile->header( … )->back_to(*$url, $text*)
 
 Éste método debe ir encadenado al de `header()` para que funcione. Crea un botón 
 en la zona izquierda de la barra horizontal con un enlace a la página que 
@@ -39,7 +39,7 @@ Mobile crea botones hacia atrás de forma automática. Si queremos establecer
 los nuestros, debemos hacerlo de esta forma y desactivar la opción de 
 `$config['mobile']['backbtn_auto'] = FALSE;` dentro del archivo de configuración.
 
-### $this->mobile->header( … )->button(*$url, $texto, $icono*)
+### $this->mobile->header( … )->button(*$url, $text, $icon*)
 
 Nuevamente, este método debe ir encadenado al de `header()`. Tambien se puede 
 hacer un encadenamiento doble entre `$this->mobile->header( … )->back_to( … )->button( … )`. 
@@ -47,7 +47,7 @@ Este último, crea un botón en la zona derecha de la barra de navegación.
 Como tercer argumento *(opcional)* podemos definir uno de los [iconos 
 preestablecidos dentro de jQuery Mobile](http://jquerymobile.com/demos/1.0b2/#/demos/1.0b2/docs/buttons/buttons-icons.html).
 
-### $this->mobile->navbar(*$navbar = array( ), $tema*)
+### $this->mobile->navbar(*$navbar = array( ), $theme*)
 
 Justo por debajo de la barra superior de navegación, podemos crear otra 
 auxiliar con diversos botones. Para ello, debemos crear una array con la url 
@@ -57,14 +57,14 @@ se encarga de dividir automáticamente este barra en tantas partes como
 valores tenga la barra de navegación. Como segundo argumento, podemos 
 establecer un tema individual para ésta.
 
-### $this->mobile->footer(*$titulo, $tema*)
+### $this->mobile->footer(*$title, $theme*)
 
 Funciona exactamente igual que la barra de header, pero creando una barra de 
 navegación en la parte inferior de la página. De la misma forma que la barra 
 de header, tambien podemos establecer la posición estática de la barra footer
 dentro del archivo de configuración.
 
-### $this->mobile->view(*$vista, $datos = array()*)
+### $this->mobile->view(*$view, $data = array()*)
 
 Para su funcionamiento, esta libreria dispone de un archivo de plantilla con 
 la base de la estructura de la página. Esto significa que no tenemos que 
@@ -80,7 +80,7 @@ A parte de los métodos básicos de la libreria, se han definido algunas
 funciones auxiliares que ayudan en el desarrollo de las páginas gracias a 
 jQuery Mobile.
 
-### link_to(*$url, $titulo, $datos = array(), $transicion*)
+### link_to(*$url, $text, $data = array(), $transition*)
 
 Funciona exactamente igual que la función `anchor()` de CodeIgniter pero, 
 acepta como último parametro la transición que queremos hacer para la 
@@ -90,14 +90,14 @@ para todas las que se hagan (tambien se aplicará en los métodos de `back_to()`
 y `button()`. Además, las transiciones se realizarán unicamente si tenemos 
 la opción de cargar por AJAX activada.
 
-### mail_to(*$email, $texto*)
+### mail_to(*$email, $text*)
 
 Crea un enlace para enviar un email a la dirección que especifiquemos como 
 primer argumento. Como resultado, aparecerá un enlace con la dirección de 
 email. Si lo queremos, podemos definir un texto alternativo para no mostrar 
 la dirección de email directamente como segundo argumento.
 
-### text_field(*$nombre, $texto, $placeholder*)
+### text_field(*$name, $text, $placeholder*)
 
 Esta función se tiene que utilizar dentro de los formularios. Simplemente 
 crea un contenedor de formulario tal como establece jQuery Mobile. Los 
@@ -106,7 +106,7 @@ input, el texto que queremos que acompañe a nuestro campo como label
 (opcional) y, por último, el texto *placeholder* que queremos que aparezca 
 dentro del campo (opcional).
 
-### pass_field($nombre, $texto, $placeholder)
+### pass_field(*$name, $text, $placeholder*)
 
 Funciona exactamente igual que la función anterior `text_field()`, pero en 
 lugar de crear un campo de texto para los formularios, crea un campo para 
