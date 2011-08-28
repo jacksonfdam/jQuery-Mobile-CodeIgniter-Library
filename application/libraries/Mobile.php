@@ -12,6 +12,10 @@
 // * **Link** - [http://iqualit.com](http://iqualit.com)
 // * **Version** - Version 0.1.2
 
+// 1. button() 4 argumento el tema para el boton
+// 2. navbar puede ser array o no 'welcome/index' 	=> array('text' => 'Inicio', 'icon' => 'star'),
+// 3. footer igual que navbar
+
 class Mobile {
 
 	var $CI;
@@ -40,26 +44,25 @@ class Mobile {
 
 	public function header($title = '', $header_theme = NULL)
 	{
-		$this->header_theme = ($header_theme != NULL) ? $header_theme : $this->config['global_theme'];
-
-		$this->title = $title;
-		$this->header = '<h1>'.$title.'</h1>';
+		$this->header_theme = $this->_set_theme($header_theme);
+		$this->title 		= $title;
+		$this->header 		= '<h1>'.$title.'</h1>';
 		
 		return $this;
 	}
 
 	public function back_to($url = '', $title = NULL)
 	{	
-		if(isset($this->header))
+		if($this->header)
 		{
-			$text = (isset($title))? $title : $this->config['backbtn_text'];
+			$text = ($title)? $title : $this->config['backbtn_text'];
 
 			$extra['title'] 	= $text;
 			$extra['class'] 	= 'ui-btn-left';
 			$extra['data-icon']	= 'arrow-l';
 			$extra['data-rel']	= 'back';
 			
-			if($this->config['ajax_loaded'] == FALSE) { $extra['data-ajax'] = 'false'; }
+			if($this->config['ajax_loaded'] == FALSE) $extra['data-ajax'] = 'false';
 							
 			$this->back_to = anchor($url, $text, $extra);
 		}
@@ -71,11 +74,12 @@ class Mobile {
 	{
 		if(isset($this->header))
 		{
-			$extra = (isset($icon)) ? array('data-icon' => $icon) : array();
+			$extra = ($icon)? array('data-icon' => $icon) : array();
+			
 			$extra['title'] = $title;
 			$extra['class'] = 'ui-btn-right';
-			
-			if($this->config['ajax_loaded'] == FALSE) { $extra['data-ajax'] = 'false'; }
+
+			if($this->config['ajax_loaded'] == FALSE) $extra['data-ajax'] = 'false';
 			
 			$this->right_button = anchor($url, $title, $extra);
 		}
@@ -89,13 +93,13 @@ class Mobile {
 
 		if(isset($this->header))
 		{
-			$header .= '<div data-role="header" id="header" data-theme="'.$this->header_theme.'" ';
+			$header .= '<div data-role="header" data-theme="'.$this->header_theme.'" ';
 			$header .= ($this->config['fixed_toolbars'] == TRUE ) ? 'data-position="fixed" ' : '';
 			$header .= ($this->config['backbtn_auto'] 	== FALSE) ? 'data-backbtn="false" '  : '';
 			$header .= '>';
-			$header .= (isset($this->back_to)) ? $this->back_to : '';
+			$header .= (isset($this->back_to)) 		? $this->back_to 		: '';
 			$header .= $this->header;
-			$header .= (isset($this->right_button)) ? $this->right_button : '';
+			$header .= (isset($this->right_button)) ? $this->right_button 	: '';
 			$header .= '</div>';
 		}
 		
@@ -104,18 +108,39 @@ class Mobile {
 
 	public function navbar($links = array(), $navbar_theme = NULL)
 	{    
-		if(!empty($links) AND is_array($links))
+		if($links AND is_array($links))
 		{
 			$this->navbar = '<div data-role="navbar"><ul>';
 		
 			foreach($links as $url => $link)
 			{
-				$extra['data-theme'] = (isset($navbar_theme)) ? $navbar_theme : $this->config['global_theme'];
-				$extra['title'] 	 = $link;
+				$extra['data-theme'] = $this->_set_theme($navbar_theme);
 
-				if($this->config['ajax_loaded'] == FALSE) { $extra['data-ajax'] = 'false'; }
+				if(is_array($link))
+				{
+					if($link['text'] AND $link['icon'])
+					{
+						$anchor_text		= $link['text'];
+						$extra['title'] 	= $link['text'];
+						$extra['data-icon']	= $link['icon'];
+					}
+					else
+					{
+						$anchor_text		= $link[0];
+						$extra['title'] 	= $link[0];
+					}
+				}
+				else
+				{
+					$extra['title'] = $link;
+					$anchor_text 	= $link;
+				}				
+
+				if($this->config['ajax_loaded'] == FALSE) $extra['data-ajax'] = 'false';
 				
-				$this->navbar .= '<li>'.anchor($url, $link, $extra).'</li>';
+				$this->navbar .= '<li>'.anchor($url, $anchor_text, $extra).'</li>';
+
+				unset($extra);
 			}
 			
 			$this->navbar .= '</ul></div>';
@@ -129,13 +154,14 @@ class Mobile {
 	public function footer($content = '', $footer_theme = NULL)
 	{
 		$footer = '<div data-role="footer" data-theme="';
-		$footer .= (isset($footer_theme))? $footer_theme : $this->config['global_theme'];
+		$footer .= $this->_set_theme($footer_theme);
 		$footer .= '"';
 		$footer .= ($this->config['fixed_toolbars'] == TRUE) ? 'data-position="fixed" ' : '';
 		
 		if(is_array($content))
 		{
-			$footer .= 'class="ui-bar"><div data-role="controlgroup" data-type="horizontal">';		
+			$footer .= 'class="ui-bar"><div data-role="controlgroup" data-type="horizontal">';	
+				
 			foreach($content as $url => $link)
 			{
 				$extra['title'] 	= $link;
@@ -143,6 +169,7 @@ class Mobile {
 			
 				$footer .= anchor($url, $link, $extra);
 			}
+
 			$footer .= '</div>';
 		}
 		else
@@ -167,6 +194,11 @@ class Mobile {
 		$data['view'] 		= $view;
 		    	
 		$this->CI->parser->parse('mobile_template', $data);
+	}
+
+	private function _set_theme($theme = null)
+	{
+		return (isset($theme))? $theme : $this->config['global_theme'];
 	}
 }
 

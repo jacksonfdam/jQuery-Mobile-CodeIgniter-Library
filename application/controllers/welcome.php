@@ -26,14 +26,14 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$this->mobile->header('Welcome to CodeIgniter!', 'a')->button('welcome/ayuda', 'Ayuda', 'info');
+		$this->mobile->header('Welcome to CodeIgniter!', 'e')->button('welcome/help', 'Help', 'info');
 
 		$this->mobile->navbar(array(
-			'welcome/index' 	=> 'Inicio',
-			'welcome/contacto'	=> 'Contacto'
-		));
-		
-		$this->mobile->footer('Footer');
+			'welcome/index' 	=> array('text' => 'Home', 		'icon' => 'home'),
+			'welcome/settings'	=> array('text' => 'Settings', 	'icon' => 'gear')
+		), 'a');
+
+		$this->mobile->footer('Footer', 'a');
 
 		$this->mobile->view('welcome_message');
 	}

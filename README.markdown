@@ -6,16 +6,19 @@ jQuery Mobile.
 ```
 public function index()
 {
-	$this->mobile->header('Welcome to CodeIgniter!', 'a')->button('welcome/ayuda', 'Ayuda', 'info');
+	if($this->agent->is_mobile())
+	{
+		$this->mobile->header('Welcome to CodeIgniter!', 'e')->button('welcome/help', 'Help', 'info');
 
-	$this->mobile->navbar(array(
-		'welcome/index' 	=> 'Inicio',
-		'welcome/contacto'	=> 'Contacto'
-	));
-	
-	$this->mobile->footer('Footer');
+		$this->mobile->navbar(array(
+			'welcome/index' 	=> array('text' => 'Home', 		'icon' => 'home'),
+			'welcome/settings'	=> array('text' => 'Settings', 	'icon' => 'gear')
+		), 'a');
 
-	$this->mobile->view('welcome_message');
+		$this->mobile->footer('Footer', 'a');
+
+		$this->mobile->view('welcome_message');
+	}
 }
 ```
 
@@ -47,15 +50,18 @@ Este último, crea un botón en la zona derecha de la barra de navegación.
 Como tercer argumento *(opcional)* podemos definir uno de los [iconos 
 preestablecidos dentro de jQuery Mobile](http://jquerymobile.com/demos/1.0b2/#/demos/1.0b2/docs/buttons/buttons-icons.html).
 
-### $this->mobile->navbar(*$navbar = array( ), $theme*)
+### $this->mobile->navbar(*$links = array( ), $theme*)
 
 Justo por debajo de la barra superior de navegación, podemos crear otra 
 auxiliar con diversos botones. Para ello, debemos crear una array con la url 
-como key y el texto del enlace como value. Es decir `$navbar['welcome/index'] = ‘Inicio’`,
-por ejemplo. Como mínimo, esta array debe tener 2 valores. jQuery Mobile ya 
-se encarga de dividir automáticamente este barra en tantas partes como 
-valores tenga la barra de navegación. Como segundo argumento, podemos 
-establecer un tema individual para ésta.
+como key y el texto del enlace como value. Es decir `$links['welcome/index'] = ‘Home’`,
+por ejemplo. jQuery Mobile ya se encarga de dividir automáticamente este barra 
+en tantas partes como valores tenga la barra de navegación. Si queremos que el
+texto lleve un icono, podemos crear una array compuesta especificando el texto y
+el icono que queremos. Es decir, el ejemplo anterior con icono seria: 
+`$links['welcome/index'] = array('text' => 'Home', 'icon' => 'home');`. Como 
+segundo argumento del método `navbar()`, podemos establecer un tema individual 
+para ésta.
 
 ### $this->mobile->footer(*$title, $theme*)
 
@@ -80,7 +86,7 @@ A parte de los métodos básicos de la libreria, se han definido algunas
 funciones auxiliares que ayudan en el desarrollo de las páginas gracias a 
 jQuery Mobile.
 
-### link_to(*$url, $text, $data = array(), $transition*)
+#### link_to(*$url, $title, $attr = array(), $transition*)
 
 Funciona exactamente igual que la función `anchor()` de CodeIgniter pero, 
 acepta como último parametro la transición que queremos hacer para la 
