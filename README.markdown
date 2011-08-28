@@ -3,12 +3,21 @@
 Libreria para el desarrollo de versiones móviles de páginas con el framework
 jQuery Mobile.
 
-* **Package** - CodeIgniter
-* **Author** - Ferran Figueredo | [http://iqualit.com](http://iqualit.com)
-* **Copyright** - Copyright (c) 2011, iQualit S.L.
-* **License** - [http://codeigniter.com/user_guide/license.html](http://codeigniter.com/user_guide/license.html)
-* **Link** - [http://iqualit.com](http://iqualit.com)
-* **Version** - Version 0.1.2
+```PHP
+public function index()
+{
+	$this->mobile->header('Welcome to CodeIgniter!', 'a')->button('welcome/ayuda', 'Ayuda', 'info');
+
+	$this->mobile->navbar(array(
+		'welcome/index' 	=> 'Inicio',
+		'welcome/contacto'	=> 'Contacto'
+	));
+	
+	$this->mobile->footer('Footer');
+
+	$this->mobile->view('welcome_message');
+}
+```
 
 ## Métodos
 
